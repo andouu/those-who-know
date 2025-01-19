@@ -1,13 +1,24 @@
 "use client";
+import { useGame } from "@/app/context/Game";
 import { useSelectedLayoutSegment } from "next/navigation";
 
 const Header = () => {
   const path = useSelectedLayoutSegment();
+  const game = useGame()!;
 
   let centerComponent;
   switch (path) {
     case "lobby":
-      centerComponent = <span className="font-semibold">Lobby</span>;
+      centerComponent = game.otherPlayerUsername ? (
+        <span>
+          <span className="font-semibold">{game.otherPlayerUsername}</span> has
+          joined
+        </span>
+      ) : (
+        <span className="text-neutral-400 font-medium">
+          Waiting for another player...
+        </span>
+      );
       break;
     default:
       centerComponent = (

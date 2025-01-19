@@ -1,3 +1,4 @@
+import { useGame } from "@/app/context/Game";
 import clsx from "clsx";
 
 const NewPrompt = () => {
@@ -74,7 +75,9 @@ const NarrowPrompt = () => {
 };
 
 export default function Prompt() {
-  if (true) {
+  const game = useGame()!;
+
+  if (game.roundsPlayed > 0) {
     return <NarrowPrompt />;
   } else {
     return <NewPrompt />;

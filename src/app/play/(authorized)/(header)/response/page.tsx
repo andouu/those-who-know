@@ -1,6 +1,6 @@
 import clsx from "clsx";
 
-export default function Answer() {
+export default function Response() {
   return (
     <div className="w-full h-full flex flex-col items-center justify-center">
       <span className="font-medium mb-2 text-neutral-400">
