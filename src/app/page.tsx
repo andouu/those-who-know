@@ -18,7 +18,12 @@ export default function Home() {
         />
       </form>
       <span className="font-medium text-sm text-neutral-300">OR</span>
-      <button className="w-64 h-12 rounded-full bg-neutral-900 text-white font-medium">
+      <button
+        className={clsx(
+          "w-64 h-12 rounded-full bg-neutral-900 text-white font-medium",
+          "transition-all duration-150 active:scale-95"
+        )}
+      >
         Create Room
       </button>
     </div>
