@@ -67,7 +67,8 @@ const EXAMPLE_GAME: GameState = {
     username: "andou",
     prompts: [],
     responses: [],
-    summary: "",
+    summary:
+      "It seems like you struggled the most with vocab, so I would advise you to refresh your knowledge on commonly used words.\n\nHowever, you were a master of sentence structure. Good job!",
   },
   otherPlayer: {
     username: "Yuchen",
