@@ -1,3 +1,4 @@
+"use client";
 import { useGame } from "@/app/context/Game";
 import clsx from "clsx";
 

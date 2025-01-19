@@ -45,72 +45,89 @@ export const useGame = () => {
   return value;
 };
 
-const EXAMPLE_GAME: Game = {
-  state: {
-    isAdmin: true,
-    roomCode: "AB912K",
-    stage: "LOBBY",
-    roundsPlayed: 0,
-    topic: "Sports",
-    topicAgreed: false,
-    canPlayAgain: false,
-    player: {
-      username: "andou",
-      selfPrompts: [],
-      otherPrompts: [],
-      responses: [],
-      feedback: [],
-      summary: "",
-    },
-    otherPlayerUsername: null,
+const EXAMPLE_GAME: GameState = {
+  isAdmin: true,
+  roomCode: "AB912K",
+  stage: "LOBBY",
+  roundsPlayed: 0,
+  topic: "Sports",
+  topicAgreed: false,
+  canPlayAgain: false,
+  player: {
+    username: "andou",
+    selfPrompts: [],
+    otherPrompts: [],
+    responses: [],
+    feedback: [],
+    summary: "",
   },
-  actions: {
-    createRoom: async (username: string) => {
-      console.log("createRoom", username);
-    },
-    joinRoom: async (roomCode: string) => {
-      console.log("joinRoom", roomCode);
-    },
-    submitTopic: async (topic: string) => {
-      console.log("submitTopic", topic);
-    },
-    agreeTopic: async () => {
-      console.log("agreeTopic");
-    },
-    startPrompt: async () => {
-      console.log("startPrompt");
-    },
-    submitPrompt: async (prompt: string) => {
-      console.log("submitPrompt", prompt);
-    },
-    submitResponse: async (response: string) => {
-      console.log("submitResponse", response);
-    },
-    submitFeedback: async (advice: string) => {
-      console.log("submitFeedback", advice);
-    },
-    submitNextQuestion: async () => {
-      console.log("submitNextQuestion");
-    },
-    submitSummary: async () => {
-      console.log("submitSummary");
-    },
-    submitPlayAgain: async () => {
-      console.log("submitPlayAgain");
-    },
-    getGameState: async () => {
-      console.log("getGameState");
-      return EXAMPLE_GAME.state;
-    },
-  },
+  otherPlayerUsername: null,
 };
 
 export const GameProvider = ({ children }: { children: React.ReactNode }) => {
   const socket = useSocket();
-  const [game] = useState<Game | null>(EXAMPLE_GAME);
+  const [gameState, setGameState] = useState<GameState | null>(EXAMPLE_GAME);
 
   // Fetch initial game state
   useEffect(() => {}, [socket]);
 
-  return <GameContext.Provider value={game}>{children}</GameContext.Provider>;
+  const createRoom = async (username: string) => {};
+
+  const joinRoom = async (roomCode: string) => {};
+
+  const agreeTopic = async () => {};
+
+  const startPrompt = async () => {};
+
+  const submitPrompt = async (prompt: string) => {};
+
+  const submitResponse = async (response: string) => {};
+
+  const submitFeedback = async (advice: string) => {};
+
+  const submitNextQuestion = async () => {};
+
+  const submitSummary = async () => {};
+
+  const submitPlayAgain = async () => {};
+
+  const submitTopic = async (topic: string) => {
+    setGameState((prev) =>
+      prev
+        ? {
+            ...prev,
+            stage: "PROMPT",
+            topic,
+            topicAgreed: false,
+          }
+        : null
+    );
+  };
+
+  const getGameState = async () => {
+    return gameState!;
+  };
+
+  const actions: GameActions = {
+    createRoom,
+    joinRoom,
+    agreeTopic,
+    startPrompt,
+    submitTopic,
+    submitPrompt,
+    submitResponse,
+    submitFeedback,
+    submitNextQuestion,
+    submitSummary,
+    submitPlayAgain,
+    getGameState,
+  };
+
+  return (
+    <GameContext.Provider
+      value={gameState ? { state: gameState, actions } : null}
+    >
+      {children}
+    </GameContext.Provider>
+  );
 };
