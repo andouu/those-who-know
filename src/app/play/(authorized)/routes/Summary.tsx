@@ -1,3 +1,4 @@
+"use client";
 import clsx from "clsx";
 
 const Actions = ({ isAdmin }: { isAdmin: boolean }) => {
