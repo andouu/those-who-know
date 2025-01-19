@@ -26,7 +26,7 @@ export default function Lobby() {
   };
 
   const canSubmit =
-    !submitting && topic.length > 0 && game.state.otherPlayerUsername;
+    !submitting && topic.length > 0 && game.state.otherPlayer?.username;
 
   return (
     <div className="w-full h-full flex flex-col items-center justify-center">
@@ -58,15 +58,17 @@ export default function Lobby() {
           Continue
         </button>
       </form>
-      {game.state.topicAgreed ? (
-        <span className="text-neutral-300 mt-5 font-medium">
-          Yuchen agrees.
-        </span>
-      ) : (
-        <span className="text-neutral-300 mt-5 font-medium">
-          Yuchen is thinking...
-        </span>
-      )}
+      {game.state.otherPlayer ? (
+        game.state.topicAgreed ? (
+          <span className="text-neutral-300 mt-5 font-medium">
+            {game.state.otherPlayer.username} agrees.
+          </span>
+        ) : (
+          <span className="text-neutral-300 mt-5 font-medium">
+            {game.state.otherPlayer.username} is thinking...
+          </span>
+        )
+      ) : null}
     </div>
   );
 }

@@ -11,10 +11,10 @@ const Header = () => {
       centerComponent = null;
       break;
     case "LOBBY":
-      centerComponent = game.state.otherPlayerUsername ? (
+      centerComponent = game.state.otherPlayer ? (
         <span>
           <span className="font-semibold">
-            {game.state.otherPlayerUsername}
+            {game.state.otherPlayer.username}
           </span>{" "}
           has joined
         </span>

@@ -18,7 +18,14 @@ export type GameState = {
     feedback: { text: string; good: boolean }[];
     summary: string;
   };
-  otherPlayerUsername: string | null;
+  otherPlayer: {
+    username: string;
+    promptSubmitted: boolean;
+    responseSubmitted: boolean;
+    feedbackSubmitted: boolean;
+    nextQuestionSubmitted: boolean;
+    playAgainSubmitted: boolean;
+  } | null;
 };
 
 export type GameActions = {
@@ -61,7 +68,14 @@ const EXAMPLE_GAME: GameState = {
     feedback: [],
     summary: "",
   },
-  otherPlayerUsername: "Yuchen",
+  otherPlayer: {
+    username: "Yuchen",
+    promptSubmitted: false,
+    responseSubmitted: false,
+    feedbackSubmitted: false,
+    nextQuestionSubmitted: false,
+    playAgainSubmitted: false,
+  },
 };
 
 export const GameProvider = ({ children }: { children: React.ReactNode }) => {
