@@ -5,6 +5,7 @@ import Response from "./routes/Response";
 import Advising from "./routes/Advising";
 import Summary from "./routes/Summary";
 import { useGame } from "@/app/context/Game";
+import Feedback from "./routes/Feedback";
 
 export default function Play() {
   const game = useGame()!;
@@ -18,6 +19,8 @@ export default function Play() {
       return <Response />;
     case "ADVISING":
       return <Advising />;
+    case "FEEDBACK":
+      return <Feedback />;
     case "SUMMARY":
       return <Summary />;
     default:

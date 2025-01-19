@@ -121,7 +121,20 @@ export const GameProvider = ({ children }: { children: React.ReactNode }) => {
     );
   };
 
-  const submitResponse = async (response: string) => {};
+  const submitResponse = async (response: string) => {
+    setGameState((prev) =>
+      prev
+        ? {
+            ...prev,
+            stage: "FEEDBACK",
+            player: {
+              ...prev.player,
+              responses: [...prev.player.responses, response],
+            },
+          }
+        : null
+    );
+  };
 
   const submitFeedback = async (advice: string) => {};
 

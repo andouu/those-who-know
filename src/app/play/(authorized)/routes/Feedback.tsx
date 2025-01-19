@@ -1,27 +1,34 @@
 "use client";
+import { useGame } from "@/app/context/Game";
 import clsx from "clsx";
+import { useState } from "react";
 
 export default function Feedback() {
+  const game = useGame()!;
+
   return (
     <div className="w-full h-full flex flex-col items-center justify-center">
       <span className="text-xl mb-12">
-        <span className="font-semibold">Yuchen&apos;s</span> Feedback.
+        <span className="font-semibold">
+          {game.state.otherPlayer!.username}&apos;s
+        </span>{" "}
+        Feedback.
       </span>
       <div className="flex items-center gap-5">
-        <div className="flex flex-col">
+        {/* <div className="flex flex-col">
           <div className="ml-1 mb-1 flex flex-col">
             <span className="font-medium leading-3">Your Response</span>
-            <span>Write a sentence about a sport you like</span>
+            <span>{game.state.player.otherPrompts.at(-1)!}</span>
           </div>
           <textarea
             className={clsx(
               "w-96 h-36 px-3 py-2 rounded-xl border-2 border-neutral-200 font-medium mb-3 resize-none",
               "focus:border-purple-600 focus:outline-none focus:border-2"
             )}
-            value="我喜欢打篮球。"
+            value={game.state.player.feedback.at(-1)!.text}
             readOnly
           />
-        </div>
+        </div> */}
         <div className="flex flex-col">
           <div className="ml-1 mb-1 flex flex-col">
             <span className="font-medium leading-3">Feedback</span>
@@ -32,7 +39,7 @@ export default function Feedback() {
               "w-96 h-36 px-3 py-2 rounded-xl border-2 border-neutral-200 font-medium mb-3 resize-none",
               "focus:border-purple-600 focus:outline-none focus:border-2"
             )}
-            value="Looks perfect!"
+            value={game.state.player.feedback.at(-1)!.text}
             readOnly
           />
         </div>
