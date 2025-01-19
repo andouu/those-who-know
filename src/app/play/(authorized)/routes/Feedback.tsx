@@ -1,7 +1,6 @@
 "use client";
 import { useGame } from "@/app/context/Game";
 import clsx from "clsx";
-import { FormEvent, useState } from "react";
 
 export default function Feedback() {
   const game = useGame()!;

@@ -37,7 +37,7 @@ export type GameActions = {
   startPrompt: () => Promise<void>;
   submitPrompt: (prompt: string) => Promise<void>;
   submitResponse: (response: string) => Promise<void>;
-  submitFeedback: (advice: string) => Promise<void>;
+  submitFeedback: (advice: string, good: boolean) => Promise<void>;
   submitNextQuestion: () => Promise<void>;
   submitSummary: () => Promise<void>;
   submitPlayAgain: () => Promise<void>;
@@ -133,17 +133,36 @@ export const GameProvider = ({ children }: { children: React.ReactNode }) => {
       prev
         ? {
             ...prev,
-            stage: "FEEDBACK",
+            stage: "ADVISING",
             player: {
               ...prev.player,
               responses: [...prev.player.responses, response],
+            },
+            // BAD BAD BAD ONLY FOR TESTING
+            otherPlayer: {
+              ...prev.otherPlayer!,
+              responses: [...prev.otherPlayer!.responses, response],
             },
           }
         : null
     );
   };
 
-  const submitFeedback = async (advice: string) => {};
+  const submitFeedback = async (advice: string, good: boolean) => {
+    setGameState((prev) =>
+      prev
+        ? {
+            ...prev,
+            stage: "FEEDBACK",
+            // BAD BAD BAD ONLY FOR TESTING
+            otherPlayer: {
+              ...prev.otherPlayer!,
+              feedback: [...prev.otherPlayer!.feedback, advice],
+            },
+          }
+        : null
+    );
+  };
 
   const submitNextQuestion = async () => {
     setGameState((prev) =>

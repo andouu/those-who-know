@@ -53,7 +53,7 @@ const NewPrompt = () => {
         <button
           type="submit"
           className={clsx(
-            "w-72 h-12 rounded-full bg-neutral-900 text-center text-white font-medium",
+            "w-96 h-12 rounded-full bg-neutral-900 text-center text-white font-medium",
             "transition-all duration-150 active:scale-95 disabled:opacity-35 disabled:pointer-events-none"
           )}
           disabled={!canSubmit}
