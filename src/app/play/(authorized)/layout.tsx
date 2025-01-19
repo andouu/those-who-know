@@ -1,6 +1,7 @@
 "use client";
 import { permanentRedirect } from "next/navigation";
 import { useGame } from "../../context/Game";
+import clsx from "clsx";
 
 const Header = () => {
   const game = useGame()!;
@@ -47,6 +48,27 @@ const Header = () => {
   );
 };
 
+const SummaryButton = () => {
+  const game = useGame()!;
+
+  if (game.state.stage === "SUMMARY" || !game.state.isAdmin) {
+    return null;
+  }
+
+  return (
+    <button
+      className={clsx(
+        "fixed bottom-5 right-5 px-5 h-11 flex items-center justify-center bg-neutral-900 rounded-full text-sm text-white font-medium",
+        "transition-all duration-150 active:scale-95",
+        !game.state.canSummary && "hidden"
+      )}
+      onClick={game.actions.submitSummary}
+    >
+      End Game & See Summary
+    </button>
+  );
+};
+
 export default function ProtectedLayout({
   children,
 }: {
@@ -61,6 +83,7 @@ export default function ProtectedLayout({
   return (
     <div className="w-full h-screen flex flex-col">
       <Header />
+      <SummaryButton />
       {children}
     </div>
   );

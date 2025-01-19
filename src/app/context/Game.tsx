@@ -10,6 +10,7 @@ export type GameState = {
   topic: string;
   topicAgreed: boolean;
   canPlayAgain: boolean;
+  canSummary: boolean;
   player: {
     username: string;
     prompts: string[]; // the prompts the player has written for the other player
@@ -61,6 +62,7 @@ const EXAMPLE_GAME: GameState = {
   topic: "Sports",
   topicAgreed: false,
   canPlayAgain: false,
+  canSummary: false,
   player: {
     username: "andou",
     prompts: [],
@@ -155,6 +157,7 @@ export const GameProvider = ({ children }: { children: React.ReactNode }) => {
             ...prev,
             stage: "FEEDBACK",
             // BAD BAD BAD ONLY FOR TESTING
+            canSummary: true,
             otherPlayer: {
               ...prev.otherPlayer!,
               feedback: [...prev.otherPlayer!.feedback, advice],
@@ -172,7 +175,9 @@ export const GameProvider = ({ children }: { children: React.ReactNode }) => {
     );
   };
 
-  const submitSummary = async () => {};
+  const submitSummary = async () => {
+    setGameState((prev) => (prev ? { ...prev, stage: "SUMMARY" } : null));
+  };
 
   const submitPlayAgain = async () => {};
 
