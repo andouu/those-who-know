@@ -1,5 +1,4 @@
 "use client";
-
 import { useSelectedLayoutSegment } from "next/navigation";
 
 const Header = () => {

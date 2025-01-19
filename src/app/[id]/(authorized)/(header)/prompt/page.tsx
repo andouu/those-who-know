@@ -35,7 +35,7 @@ const NarrowPrompt = () => {
   return (
     <div className="w-full h-full flex flex-col items-center justify-center">
       <span className="text-xl font-semibold mb-1">
-        Narrow <span className="font-semibold">Yuchen's</span> prompt!
+        Narrow <span className="font-semibold">Yuchen&apos;s</span> prompt!
       </span>
       <span className="text-neutral-400 mb-5 font-medium">
         See your past prompts below.

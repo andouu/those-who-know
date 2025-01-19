@@ -1,5 +1,4 @@
 "use client";
-import { permanentRedirect } from "next/navigation";
 import { useGame } from "../../context/Game";
 
 export default function ProtectedLayout({
