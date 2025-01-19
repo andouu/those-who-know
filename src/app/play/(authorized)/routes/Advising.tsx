@@ -39,7 +39,7 @@ export default function Advising() {
           </div>
           <textarea
             className={clsx(
-              "w-96 h-36 px-3 py-2 rounded-xl border-2 border-neutral-200 font-medium mb-3 resize-none",
+              "w-84 h-36 px-3 py-2 rounded-xl border-2 border-neutral-200 font-medium mb-3 resize-none",
               "focus:border-purple-600 focus:outline-none focus:border-2"
             )}
             value={game.state.otherPlayer!.responses.at(-1)!}
@@ -53,7 +53,7 @@ export default function Advising() {
           </div>
           <textarea
             className={clsx(
-              "w-96 h-36 px-3 py-2 rounded-xl border-2 border-neutral-200 font-medium mb-3 resize-none",
+              "w-84 h-36 px-3 py-2 rounded-xl border-2 border-neutral-200 font-medium mb-3 resize-none",
               "focus:border-purple-600 focus:outline-none focus:border-2 transition-colors duration-150 disabled:opacity-75 disabled:pointer-events-none"
             )}
             value={feedback}

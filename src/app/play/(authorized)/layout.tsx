@@ -49,7 +49,7 @@ const Header = () => {
         You&apos;re{" "}
         <span className="font-semibold">{game.state.player.username}</span>
       </span>
-      <span className="flex-1 text-center">{centerComponent}</span>
+      <span className="flex-2 text-center">{centerComponent}</span>
       <span className="flex-1 text-end">
         Room <span className="font-semibold">{game.state.roomCode}</span>
       </span>

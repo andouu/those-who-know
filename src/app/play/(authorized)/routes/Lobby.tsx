@@ -56,7 +56,7 @@ const AdminLobby = () => {
           )}
           disabled={!canSubmit}
         >
-          Continue
+          Save
         </button>
       </form>
       {game.state.otherPlayer ? (
