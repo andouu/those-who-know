@@ -9,7 +9,7 @@ export default function Answer() {
       <span className="text-2xl mb-5">Write about a sport you like</span>
       <textarea
         className={clsx(
-          "w-96 h-32 px-3 py-2 rounded-xl border-2 border-neutral-200 font-medium mb-3 resize-none",
+          "w-96 h-36 px-3 py-2 rounded-xl border-2 border-neutral-200 font-medium mb-3 resize-none",
           "focus:border-purple-600 focus:outline-none focus:border-2"
         )}
         placeholder="Answer here..."
