@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Rubik } from "next/font/google";
 import "./globals.css";
+import { Providers } from "./components/Providers";
 
 const rubikSans = Rubik({ subsets: ["latin"], variable: "--font-rubik" });
 
@@ -16,7 +17,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${rubikSans.variable} antialiased`}>{children}</body>
+      <body className={`${rubikSans.variable} antialiased`}>
+        <Providers>{children}</Providers>
+      </body>
     </html>
   );
 }

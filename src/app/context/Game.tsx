@@ -7,9 +7,6 @@ const GameContext = createContext<Game | null>(null);
 
 export const useGame = () => {
   const value = useContext(GameContext);
-  if (!value) {
-    throw new Error("useGame must be used within a GameProvider");
-  }
   return value;
 };
 
