@@ -28,7 +28,7 @@ const Header = () => {
       centerComponent = (
         <span>
           The question topic is{" "}
-          <span className="font-semibold">{"Sports"}</span>
+          <span className="font-semibold">{game.state.topic}</span>
         </span>
       );
   }
@@ -36,11 +36,12 @@ const Header = () => {
   return (
     <div className="w-full h-16 flex items-center px-5 border-b-2 border-neutral-100">
       <span className="flex-1">
-        You&apos;re <span className="font-semibold">andou</span>
+        You&apos;re{" "}
+        <span className="font-semibold">{game.state.player.username}</span>
       </span>
       <span className="flex-1 text-center">{centerComponent}</span>
       <span className="flex-1 text-end">
-        Room <span className="font-semibold">AB912K</span>
+        Room <span className="font-semibold">{game.state.roomCode}</span>
       </span>
     </div>
   );

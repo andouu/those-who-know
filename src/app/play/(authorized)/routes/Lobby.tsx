@@ -25,7 +25,8 @@ export default function Lobby() {
     }
   };
 
-  const canSubmit = !submitting && topic.length > 0;
+  const canSubmit =
+    !submitting && topic.length > 0 && game.state.otherPlayerUsername;
 
   return (
     <div className="w-full h-full flex flex-col items-center justify-center">

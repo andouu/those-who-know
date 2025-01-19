@@ -61,7 +61,7 @@ const EXAMPLE_GAME: GameState = {
     feedback: [],
     summary: "",
   },
-  otherPlayerUsername: null,
+  otherPlayerUsername: "Yuchen",
 };
 
 export const GameProvider = ({ children }: { children: React.ReactNode }) => {
