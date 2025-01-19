@@ -9,10 +9,12 @@ const Header = () => {
   let centerComponent;
   switch (path) {
     case "lobby":
-      centerComponent = game.otherPlayerUsername ? (
+      centerComponent = game.state.otherPlayerUsername ? (
         <span>
-          <span className="font-semibold">{game.otherPlayerUsername}</span> has
-          joined
+          <span className="font-semibold">
+            {game.state.otherPlayerUsername}
+          </span>{" "}
+          has joined
         </span>
       ) : (
         <span className="text-neutral-400 font-medium">

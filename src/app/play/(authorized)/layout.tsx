@@ -15,7 +15,7 @@ export default function ProtectedLayout({
   }
 
   // let href;
-  // switch (game.stage) {
+  // switch (game.state.stage) {
   //   case "LOBBY":
   //     href = "/play/lobby";
   //     break;

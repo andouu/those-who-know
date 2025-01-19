@@ -56,7 +56,7 @@ export default function Lobby() {
           Continue
         </button>
       </form>
-      {game.topicAgreed ? (
+      {game.state.topicAgreed ? (
         <span className="text-neutral-300 mt-5 font-medium">
           Yuchen agrees.
         </span>
