@@ -1,4 +1,5 @@
 "use client";
+import { permanentRedirect } from "next/navigation";
 import { useGame } from "../../context/Game";
 
 export default function ProtectedLayout({
@@ -9,7 +10,7 @@ export default function ProtectedLayout({
   const game = useGame();
 
   if (!game) {
-    // permanentRedirect("/");
+    permanentRedirect("/");
   }
 
   return <div className="w-full h-screen">{children}</div>;
