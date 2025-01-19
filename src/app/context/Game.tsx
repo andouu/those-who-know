@@ -89,22 +89,6 @@ export const GameProvider = ({ children }: { children: React.ReactNode }) => {
 
   const joinRoom = async (roomCode: string) => {};
 
-  const agreeTopic = async () => {};
-
-  const startPrompt = async () => {};
-
-  const submitPrompt = async (prompt: string) => {};
-
-  const submitResponse = async (response: string) => {};
-
-  const submitFeedback = async (advice: string) => {};
-
-  const submitNextQuestion = async () => {};
-
-  const submitSummary = async () => {};
-
-  const submitPlayAgain = async () => {};
-
   const submitTopic = async (topic: string) => {
     setGameState((prev) =>
       prev
@@ -117,6 +101,35 @@ export const GameProvider = ({ children }: { children: React.ReactNode }) => {
         : null
     );
   };
+
+  const agreeTopic = async () => {};
+
+  const startPrompt = async () => {};
+
+  const submitPrompt = async (prompt: string) => {
+    setGameState((prev) =>
+      prev
+        ? {
+            ...prev,
+            stage: "RESPONSE",
+            player: {
+              ...prev.player,
+              otherPrompts: [...prev.player.otherPrompts, prompt],
+            },
+          }
+        : null
+    );
+  };
+
+  const submitResponse = async (response: string) => {};
+
+  const submitFeedback = async (advice: string) => {};
+
+  const submitNextQuestion = async () => {};
+
+  const submitSummary = async () => {};
+
+  const submitPlayAgain = async () => {};
 
   const getGameState = async () => {
     return gameState!;
