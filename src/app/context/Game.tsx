@@ -1,6 +1,7 @@
 "use client";
 import { createContext, useContext, useEffect, useState } from "react";
-import { useSocket } from "./socket";
+import { useSocket } from "./Socket";
+import { useRouter } from "next/navigation";
 
 export type GameState = {
   isAdmin: boolean;
@@ -31,8 +32,6 @@ export type GameState = {
 };
 
 export type GameActions = {
-  createRoom: (username: string) => Promise<void>;
-  joinRoom: (roomCode: string) => Promise<void>;
   submitTopic: (topic: string) => Promise<void>;
   agreeTopic: () => Promise<void>;
   startPrompt: () => Promise<void>;
@@ -84,111 +83,66 @@ const EXAMPLE_GAME: GameState = {
 };
 
 export const GameProvider = ({ children }: { children: React.ReactNode }) => {
-  const socket = useSocket();
-  const [gameState, setGameState] = useState<GameState | null>(EXAMPLE_GAME);
+  const { socket } = useSocket();
+  const [gameState, setGameState] = useState<GameState | null>(null);
+  const router = useRouter();
 
-  // Fetch initial game state
-  useEffect(() => {}, [socket]);
+  useEffect(() => {
+    if (!socket) {
+      return;
+    }
 
-  const createRoom = async (username: string) => {};
+    socket.on("updateGameState", (gameState) => {
+      setGameState(gameState);
+      router.replace("/play");
+    });
 
-  const joinRoom = async (roomCode: string) => {};
+    return () => {
+      socket.off("updateGameState");
+    };
+  });
 
   const submitTopic = async (topic: string) => {
-    setGameState((prev) =>
-      prev
-        ? {
-            ...prev,
-            stage: "PROMPT",
-            topic,
-            topicAgreed: false,
-          }
-        : null
-    );
+    socket?.emit("submitTopic", { topic }, console.log);
   };
 
-  const agreeTopic = async () => {};
+  const agreeTopic = async () => {
+    socket?.emit("agreeTopic", {}, console.log);
+  };
 
-  const startPrompt = async () => {};
+  const startPrompt = async () => {
+    socket?.emit("startPrompt", {}, console.log);
+  };
 
   const submitPrompt = async (prompt: string) => {
-    setGameState((prev) =>
-      prev
-        ? {
-            ...prev,
-            stage: "RESPONSE",
-            player: {
-              ...prev.player,
-              prompts: [...prev.player.prompts, prompt],
-            },
-            // BAD BAD BAD ONLY FOR TESTING
-            otherPlayer: {
-              ...prev.otherPlayer!,
-              prompts: [...prev.otherPlayer!.prompts, prompt],
-            },
-          }
-        : null
-    );
+    socket?.emit("submitPrompt", { prompt }, console.log);
   };
 
   const submitResponse = async (response: string) => {
-    setGameState((prev) =>
-      prev
-        ? {
-            ...prev,
-            stage: "ADVISING",
-            player: {
-              ...prev.player,
-              responses: [...prev.player.responses, response],
-            },
-            // BAD BAD BAD ONLY FOR TESTING
-            otherPlayer: {
-              ...prev.otherPlayer!,
-              responses: [...prev.otherPlayer!.responses, response],
-            },
-          }
-        : null
-    );
+    socket?.emit("submitResponse", { response }, console.log);
   };
 
   const submitFeedback = async (advice: string, good: boolean) => {
-    setGameState((prev) =>
-      prev
-        ? {
-            ...prev,
-            stage: "FEEDBACK",
-            // BAD BAD BAD ONLY FOR TESTING
-            canSummary: true,
-            otherPlayer: {
-              ...prev.otherPlayer!,
-              feedback: [...prev.otherPlayer!.feedback, advice],
-            },
-          }
-        : null
-    );
+    socket?.emit("submitFeedback", { feedback: advice }, console.log);
   };
 
   const submitNextQuestion = async () => {
-    setGameState((prev) =>
-      prev
-        ? { ...prev, stage: "PROMPT", roundsPlayed: prev.roundsPlayed + 1 }
-        : null
-    );
+    socket?.emit("submitNextQuestion", {}, console.log);
   };
 
   const submitSummary = async () => {
-    setGameState((prev) => (prev ? { ...prev, stage: "SUMMARY" } : null));
+    socket?.emit("submitSummary", {}, console.log);
   };
 
-  const submitPlayAgain = async () => {};
+  const submitPlayAgain = async () => {
+    socket?.emit("submitPlayAgain", {}, console.log);
+  };
 
   const getGameState = async () => {
     return gameState!;
   };
 
   const actions: GameActions = {
-    createRoom,
-    joinRoom,
     agreeTopic,
     startPrompt,
     submitTopic,

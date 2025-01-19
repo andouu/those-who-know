@@ -13,12 +13,21 @@ const Header = () => {
       break;
     case "LOBBY":
       centerComponent = game.state.otherPlayer ? (
-        <span>
-          <span className="font-semibold">
-            {game.state.otherPlayer.username}
-          </span>{" "}
-          has joined
-        </span>
+        game.state.isAdmin ? (
+          <span>
+            <span className="font-semibold">
+              {game.state.otherPlayer.username}
+            </span>{" "}
+            has joined
+          </span>
+        ) : (
+          <span>
+            You&apos;ve joined{" "}
+            <span className="font-semibold">
+              {game.state.otherPlayer.username}
+            </span>{" "}
+          </span>
+        )
       ) : (
         <span className="text-neutral-400 font-medium">
           Waiting for another player...

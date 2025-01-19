@@ -160,7 +160,7 @@ const NarrowPrompt = () => {
 export default function Prompt() {
   const game = useGame()!;
 
-  if (game.state.roundsPlayed > 0) {
+  if (game.state.roundsPlayed > 1) {
     return <NarrowPrompt />;
   } else {
     return <NewPrompt />;
