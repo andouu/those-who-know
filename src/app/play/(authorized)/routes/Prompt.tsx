@@ -16,7 +16,6 @@ const NewPrompt = () => {
 
     try {
       setSubmitting(true);
-      await new Promise((resolve) => setTimeout(resolve, 1000));
       game.actions.submitPrompt(prompt);
     } catch (err) {
       console.error(err);
@@ -88,7 +87,6 @@ const NarrowPrompt = () => {
 
     try {
       setSubmitting(true);
-      await new Promise((resolve) => setTimeout(resolve, 1000));
       game.actions.submitPrompt(prompt);
     } catch (err) {
       console.error(err);
@@ -146,9 +144,14 @@ const NarrowPrompt = () => {
       )}
       <div className="mt-10 flex flex-col items-center justify-center">
         <span className="font-medium mb-3">Past Prompts</span>
-        {game.state.player.selfPrompts.map((prompt) => (
-          <span className="text-neutral-400">{prompt}</span>
-        ))}
+        {game.state.player.prompts
+          .slice(-5)
+          .toReversed()
+          .map((prompt, i) => (
+            <span key={i} className="text-neutral-400">
+              {prompt}
+            </span>
+          ))}
       </div>
     </div>
   );

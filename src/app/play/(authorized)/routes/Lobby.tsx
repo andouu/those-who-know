@@ -16,7 +16,6 @@ export default function Lobby() {
 
     try {
       setSubmitting(true);
-      await new Promise((resolve) => setTimeout(resolve, 1000));
       game.actions.submitTopic(topic);
     } catch (err) {
       console.error(err);

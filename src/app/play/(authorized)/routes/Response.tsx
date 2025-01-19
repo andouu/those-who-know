@@ -16,7 +16,6 @@ export default function Response() {
 
     try {
       setSubmitting(true);
-      await new Promise((resolve) => setTimeout(resolve, 1000));
       game.actions.submitResponse(response);
     } catch (err) {
       console.error(err);
@@ -33,7 +32,7 @@ export default function Response() {
         Answer your prompt!
       </span>
       <span className="text-2xl mb-5">
-        {game.state.player.otherPrompts.at(-1)!}
+        {game.state.otherPlayer!.prompts.at(-1)!}
       </span>
       <form
         className="flex flex-col items-center"

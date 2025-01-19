@@ -12,10 +12,8 @@ export type GameState = {
   canPlayAgain: boolean;
   player: {
     username: string;
-    selfPrompts: string[];
-    otherPrompts: string[];
-    responses: string[];
-    feedback: { text: string; good: boolean }[];
+    prompts: string[]; // the prompts the player has written for the other player
+    responses: string[]; // the player's responses to the other player's prompts
     summary: string;
   };
   otherPlayer: {
@@ -25,6 +23,9 @@ export type GameState = {
     feedbackSubmitted: boolean;
     nextQuestionSubmitted: boolean;
     playAgainSubmitted: boolean;
+    prompts: string[]; // the other player's prompts to me
+    responses: string[]; // the other player's responses to my prompts
+    feedback: string[]; // the other player's feedback to my responses
   } | null;
 };
 
@@ -62,10 +63,8 @@ const EXAMPLE_GAME: GameState = {
   canPlayAgain: false,
   player: {
     username: "andou",
-    selfPrompts: [],
-    otherPrompts: [],
+    prompts: [],
     responses: [],
-    feedback: [],
     summary: "",
   },
   otherPlayer: {
@@ -75,6 +74,9 @@ const EXAMPLE_GAME: GameState = {
     feedbackSubmitted: false,
     nextQuestionSubmitted: false,
     playAgainSubmitted: false,
+    prompts: [],
+    responses: [],
+    feedback: [],
   },
 };
 
@@ -114,7 +116,12 @@ export const GameProvider = ({ children }: { children: React.ReactNode }) => {
             stage: "RESPONSE",
             player: {
               ...prev.player,
-              otherPrompts: [...prev.player.otherPrompts, prompt],
+              prompts: [...prev.player.prompts, prompt],
+            },
+            // BAD BAD BAD ONLY FOR TESTING
+            otherPlayer: {
+              ...prev.otherPlayer!,
+              prompts: [...prev.otherPlayer!.prompts, prompt],
             },
           }
         : null
@@ -138,7 +145,13 @@ export const GameProvider = ({ children }: { children: React.ReactNode }) => {
 
   const submitFeedback = async (advice: string) => {};
 
-  const submitNextQuestion = async () => {};
+  const submitNextQuestion = async () => {
+    setGameState((prev) =>
+      prev
+        ? { ...prev, stage: "PROMPT", roundsPlayed: prev.roundsPlayed + 1 }
+        : null
+    );
+  };
 
   const submitSummary = async () => {};
 
