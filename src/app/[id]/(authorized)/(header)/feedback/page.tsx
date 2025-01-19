@@ -1,15 +1,15 @@
 import clsx from "clsx";
 
-export default function Advising() {
+export default function Feedback() {
   return (
     <div className="w-full h-full flex flex-col items-center justify-center">
       <span className="text-xl mb-12">
-        Rate <span className="font-semibold">Yuchen&apos;s</span> Answer.
+        <span className="font-semibold">Yuchen&apos;s</span> Feedback.
       </span>
       <div className="flex items-center gap-5">
         <div className="flex flex-col">
           <div className="ml-1 mb-1 flex flex-col">
-            <span className="font-medium leading-3">Prompt</span>
+            <span className="font-medium leading-3">Your Response</span>
             <span>Write a sentence about a sport you like</span>
           </div>
           <textarea
@@ -31,28 +31,22 @@ export default function Advising() {
               "w-96 h-36 px-3 py-2 rounded-xl border-2 border-neutral-200 font-medium mb-3 resize-none",
               "focus:border-purple-600 focus:outline-none focus:border-2"
             )}
-            placeholder="e.g. Good sentence structure, but incorrect vocab."
+            value="Looks perfect!"
+            readOnly
           />
         </div>
       </div>
-      <div className="flex items-center gap-5 mt-5">
-        <button
-          className={clsx(
-            "h-12 px-7 bg-green-500 text-white font-medium rounded-full",
-            "transition-all duration-150 active:scale-95"
-          )}
-        >
-          Looks good to me!
-        </button>
-        <button
-          className={clsx(
-            "h-12 px-7 bg-red-500 text-white font-medium rounded-full",
-            "transition-all duration-150 active:scale-95"
-          )}
-        >
-          Could use some work.
-        </button>
-      </div>
+      <button
+        className={clsx(
+          "w-72 h-12 mt-10 rounded-full bg-neutral-900 text-center text-white font-medium",
+          "transition-all duration-150 active:scale-95"
+        )}
+      >
+        Next Question
+      </button>
+      <span className="text-neutral-300 mt-5 font-medium">
+        Yuchen is ready.
+      </span>
     </div>
   );
 }
